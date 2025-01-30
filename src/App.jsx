@@ -6,15 +6,27 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Sidebar from "./components/Sidebar";
 import Todos from "./components/Todos";
+import { Route, Routes } from "react-router-dom";
+import AboutPage from "./pages/AboutPage";
+import Dashboard from "./pages/Dashboard";
+import ItemDetails from "./pages/ItemDetails";
+import NotFoundPage from "./pages/NotFoundPage";
+import items from "./assets/data.json";
 
 function App() {
-  const [count, setCount] = useState(0);
+  // const [count, setCount] = useState(0);
 
   return (
     <>
       <Navbar />
       <Sidebar />
-      <Todos />
+      {/* <Todos /> */}
+      <Routes>
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/:itemId" element={<ItemDetails items={items} />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
       <Footer />
     </>
   );
