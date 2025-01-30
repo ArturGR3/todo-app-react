@@ -9,14 +9,20 @@ export default function Todos() {
     <>
       <main>
         <p>ToDOS </p>
-        <ul>
-          {todos.map((todo, index) => (
-            <li className={"item"} key={index}>
-              <button className="delete-button" onClick={() => setState(todos.filter((_, i) => i !== index))}>
+        <ul className="items">
+          {todos.map((todo) => (
+            <li className={"item"} key={todo.id}>
+              <button className="delete-button" onClick={() => setState(todos.filter((t) => t.id !== todo.id))}>
                 Delete
               </button>
+              <button
+                className="complete-button"
+                onClick={() => setState(todos.map((t) => (t.id === todo.id ? { ...t, completed: !t.completed } : t)))}
+              >
+                Complete
+              </button>
               {todo.task} {todo.completed ? "✓" : "X"}
-              <Link to={`/${todo.id}`} className="details-button">
+              <Link to={`/item/${todo.id}`} className="details-button">
                 Details
               </Link>
             </li>

@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import "../styles/ItemDetails.css";
+import "../styles/shared.css";
 
 export default function ItemDetails({ items }) {
   const { itemId } = useParams();
@@ -13,8 +15,13 @@ export default function ItemDetails({ items }) {
 
   return (
     <>
-      <div className="item-details">{foundItem.task}</div>
-      <Link to={"/"}> Placeholder ItemDetails </Link>
+      <div className="item-details">
+        <h2>{foundItem.task}</h2>
+        <p>{foundItem.details}</p>
+        <Link to="/" className="btn">
+          Back to Dashboard
+        </Link>
+      </div>
     </>
   );
 }

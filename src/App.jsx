@@ -17,18 +17,20 @@ function App() {
   // const [count, setCount] = useState(0);
 
   return (
-    <>
+    <div className="app-container">
       <Navbar />
       <Sidebar />
       {/* <Todos /> */}
-      <Routes>
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/:itemId" element={<ItemDetails items={items} />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
+      <div className="main-content">
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/item/:itemId" element={<ItemDetails items={items} />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </div>
       <Footer />
-    </>
+    </div>
   );
 }
 
