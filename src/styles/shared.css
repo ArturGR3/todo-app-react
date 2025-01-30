@@ -45,3 +45,12 @@
   background-color: #dc3545;
   color: white;
 }
+
+.complete-button.completed {
+  background-color: #4caf50; /* Green color for completed state */
+  color: white;
+}
+
+.complete-button.completed:hover {
+  background-color: #45a049; /* Darker green on hover */
+}
