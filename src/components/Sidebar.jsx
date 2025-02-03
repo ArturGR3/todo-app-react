@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Sidebar() {
   return (
     <aside className="sidebar">
@@ -5,10 +7,14 @@ export default function Sidebar() {
         <nav>
           <ul>
             <li>
-              <a href="/">Home</a>
+              <Link to="/" className="sidebar__nav-link">
+                Home
+              </Link>
             </li>
             <li>
-              <a href="/about">About</a>
+              <Link to="/about" className="sidebar__nav-link">
+                About
+              </Link>
             </li>
           </ul>
         </nav>

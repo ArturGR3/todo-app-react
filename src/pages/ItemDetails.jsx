@@ -5,10 +5,18 @@ import "../styles/shared.css";
 
 export default function ItemDetails({ items }) {
   const { itemId } = useParams();
-  console.log("itemId type:", typeof itemId, "value:", itemId);
+
+  // Add this debug log to see all items
+  console.log("All items:", items);
 
   const foundItem = items.find((item) => {
-    return item.id === Number(itemId);
+    // Let's log in a more readable format
+    console.log("Comparing:", {
+      itemId: itemId,
+      currentItemId: item.id,
+      currentItemIdType: typeof item.id,
+    });
+    return item.id.toString() === itemId; // Remove toString() for now
   });
 
   console.log("find porjec", foundItem);

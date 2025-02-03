@@ -1,24 +1,12 @@
 #logo {
-  width: 100px;
+  width: 6%;
 }
-
 .navbar__brand {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: flex-start;
-  padding: 20px 0;
+  justify-content: center;
   margin: 0 20px;
   background-color: #f0f0f0;
   border-radius: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.delete-button {
-  margin: 5px;
-  gap: 5px;
-}
-
-.item {
-  padding: 5px;
 }

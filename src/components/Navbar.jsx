@@ -5,7 +5,7 @@ export default function Navbar() {
     <nav className="navbar">
       <div className="navbar__brand">
         <img id={"logo"} src={logo} alt="Logo" />
-        <span>To-do APP </span>
+        <h1 id="title">Liverpool fc to-do list</h1>
       </div>
     </nav>
   );
