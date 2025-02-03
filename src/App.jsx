@@ -22,10 +22,17 @@ function App() {
     setTodos(todos.filter((t) => t.id !== id));
   };
 
-  const getTodo = (data) => {
-    // console.log("added student:", data);
+  const updateTodo = (todoData) => {
+    setTodos((prevTodos) => {
+      // Check if todo with this id already exists
+      const exists = prevTodos.some((todo) => todo.id === todoData.id);
 
-    setTodos((prevState) => [...prevState, data]);
+      if (exists) {
+        return prevTodos.map((todo) => (todo.id === todoData.id ? todoData : todo));
+      } else {
+        return [...prevTodos, todoData];
+      }
+    });
   };
 
   return (
@@ -33,15 +40,27 @@ function App() {
       <Navbar />
       <div className="main-content">
         <Sidebar />
-        <div className="todos">
-          <AddToDo setTodos={getTodo} />
-          <Routes>
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/" element={<Todos todos={todos} onComplete={handleComplete} onDelete={handleDelete} />} />
-            <Route path="/item/:itemId" element={<ItemDetails items={todos} />} />
-            <Route path="*" element={<NotFoundPage />} />
-          </Routes>
-        </div>
+        <Routes>
+          <Route path="/about" element={<AboutPage />} />
+          <Route
+            path="/"
+            element={
+              <div className="todos">
+                <AddToDo updateTodo={updateTodo} />
+                <Todos todos={todos} onComplete={handleComplete} onDelete={handleDelete} />
+              </div>
+            }
+          />
+          <Route
+            path="/item/:itemId"
+            element={
+              <div className="todos">
+                <ItemDetails items={todos} updateTodo={updateTodo} />
+              </div>
+            }
+          />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
       </div>
       <Footer />
     </div>
