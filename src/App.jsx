@@ -55,7 +55,7 @@ function App() {
             path="/item/:itemId"
             element={
               <div className="todos">
-                <ItemDetails items={todos} updateTodo={updateTodo} />
+                <ItemDetails className={"new-class-name"} items={todos} updateTodo={updateTodo} />
               </div>
             }
           />

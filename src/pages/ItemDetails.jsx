@@ -4,7 +4,7 @@ import "../styles/ItemDetails.css";
 import "../styles/shared.css";
 import { useState, useEffect } from "react";
 
-export default function ItemDetails({ items, updateTodo }) {
+export default function ItemDetails({ items, updateTodo, className }) {
   const { itemId } = useParams();
 
   const foundItem = items.find((item) => {
@@ -36,7 +36,7 @@ export default function ItemDetails({ items, updateTodo }) {
 
   return (
     <>
-      <div className="item-details">
+      <div className={`item-details ${className}`}>
         {isEditing ? (
           <div className="input-block">
             <input type="text" value={editedTask} onChange={(e) => setEditedTask(e.target.value)} className="edit-input" />
@@ -44,7 +44,7 @@ export default function ItemDetails({ items, updateTodo }) {
             <textarea value={editedDetails} onChange={(e) => setEditedDetails(e.target.value)} className="edit-input" />
 
             <label id="checked">
-              <input type="checkbox" checked={editedCompleted} onChange={(e) => setCompleted(e.target.checked)} className="edit-input" />
+              <input type="checkbox" checked={editedCompleted} onChange={(e) => setCompleted(e.target.checked)} className={"edit-input"} />
               <span>{editedCompleted ? "Completed" : "Not Completed"}</span>
             </label>
 
