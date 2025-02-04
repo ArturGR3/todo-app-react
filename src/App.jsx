@@ -1,9 +1,9 @@
 import { useState } from "react";
+import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Sidebar from "./components/Sidebar";
 import Todos from "./components/Todos";
-import { Route, Routes } from "react-router-dom";
 import AboutPage from "./pages/AboutPage";
 import ItemDetails from "./pages/ItemDetails";
 import NotFoundPage from "./pages/NotFoundPage";
@@ -23,11 +23,12 @@ function App() {
 
   const updateTodo = (todoData) => {
     setTodos((prevTodos) => {
-      // Check if todo with this id already exists
-      const exists = prevTodos.some((todo) => todo.id === todoData.id);
+      const exists = prevTodos.some((todo) => String(todo.id) === String(todoData.id));
+
+      console.log(prevTodos);
 
       if (exists) {
-        return prevTodos.map((todo) => (todo.id === todoData.id ? todoData : todo));
+        return prevTodos.map((todo) => (String(todo.id) === String(todoData.id) ? todoData : todo));
       } else {
         return [...prevTodos, todoData];
       }
@@ -38,7 +39,6 @@ function App() {
     <div className="flex flex-col min-h-screen">
       <Navbar />
       <div className="flex flex-1 p-4">
-        {/* <div className="flex"> */}
         <Sidebar />
         <Routes>
           <Route path="/about" element={<AboutPage />} />
