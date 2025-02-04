@@ -1,5 +1,4 @@
 import { useState } from "react";
-import "./App.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Sidebar from "./components/Sidebar";
@@ -36,16 +35,17 @@ function App() {
   };
 
   return (
-    <div className="app-container">
+    <div className="flex flex-col min-h-screen">
       <Navbar />
-      <div className="main-content">
+      <div className="flex flex-1 p-4">
+        {/* <div className="flex"> */}
         <Sidebar />
         <Routes>
           <Route path="/about" element={<AboutPage />} />
           <Route
             path="/"
             element={
-              <div className="todos">
+              <div className="flex flex-col items-center justify-center w-full gap-20">
                 <AddToDo updateTodo={updateTodo} />
                 <Todos todos={todos} onComplete={handleComplete} onDelete={handleDelete} />
               </div>
@@ -54,8 +54,8 @@ function App() {
           <Route
             path="/item/:itemId"
             element={
-              <div className="todos">
-                <ItemDetails className={"new-class-name"} items={todos} updateTodo={updateTodo} />
+              <div className="flex flex-col items-center justify-start w-full gap-5">
+                <ItemDetails items={todos} updateTodo={updateTodo} />
               </div>
             }
           />
