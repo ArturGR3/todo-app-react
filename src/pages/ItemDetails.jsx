@@ -1,17 +1,26 @@
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { useTodosContext } from "../context/Todos.context";
 
-export default function ItemDetails({ items, updateTodo }) {
-  const { itemId } = useParams();
-  const foundItem = items.find((item) => String(item.id) === String(itemId));
-  console.log("foundItem", foundItem);
-  const [editedTask, setEditedTask] = useState(foundItem?.task || "");
-  const [editedDetails, setEditedDetails] = useState(foundItem?.details || "");
-  const [editedCompleted, setCompleted] = useState(foundItem?.completed || false);
+export default function ItemDetails() {
+  const { todos, setTodos } = useTodosContext();
+
+  const { todoID } = useParams();
+
+  const foundTodo = todos.find((item) => String(item.id) === String(todoID));
+  const [editedTask, setEditedTask] = useState(foundTodo?.task || "");
+  const [editedDetails, setEditedDetails] = useState(foundTodo?.details || "");
+  const [editedCompleted, setCompleted] = useState(foundTodo?.completed || false);
+
+  const updateTodo = (todoData) => {
+    setTodos((prevTodos) => {
+      return prevTodos.map((todo) => (String(todo.id) === String(todoData.id) ? todoData : todo));
+    });
+  };
 
   const handleEdit = () => {
     const updatedTodo = {
-      ...foundItem,
+      ...foundTodo,
       task: editedTask,
       details: editedDetails,
       completed: editedCompleted,
@@ -21,7 +30,7 @@ export default function ItemDetails({ items, updateTodo }) {
   };
 
   return (
-    <div className="flex flex-col items-center p-5 m-4 bg-gray-100 rounded-lg shadow-sm">
+    <div className="flex flex-col p-5 m-10 w-full bg-gray-100 rounded-lg shadow-sm">
       <div className="flex flex-col items-start w-full">
         <h4 className="text-2xl text-neutral-500 dark:text-neutral-400 mb-1">Task Title</h4>
         <input type="text" value={editedTask} onChange={(e) => setEditedTask(e.target.value)} className="w-full mb-3 p-2 border border-gray-200 rounded text-neutral-600" />

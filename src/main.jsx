@@ -4,12 +4,15 @@ import "./index.css";
 import App from "./App.jsx";
 // import {} from "react-router-dom";
 import { BrowserRouter as Router } from "react-router-dom";
+import TodosContextWrapper from "./context/Todos.context.jsx";
 // import { BrowserRouter } from "react-router-dom";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Router>
-      <App />
+      <TodosContextWrapper>
+        <App />
+      </TodosContextWrapper>
     </Router>
   </StrictMode>
 );
