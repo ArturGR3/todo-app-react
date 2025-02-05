@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
-export default function AddToDo({ updateTodo }) {
+export default function AddToDo({ addToDo }) {
   const [taskInput, setTaskInput] = useState("");
   const [detailsInput, setDetailsInput] = useState("");
 
@@ -24,7 +24,7 @@ export default function AddToDo({ updateTodo }) {
       details: detailsInput,
     };
 
-    updateTodo(newTodo);
+    addToDo(newTodo);
     setTaskInput("");
     setDetailsInput("");
   };

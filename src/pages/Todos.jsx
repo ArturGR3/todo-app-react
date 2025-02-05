@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import items from "../assets/data.json";
 import AddToDo from "../components/AddToDo";
+import { useTodosContext } from "../context/Todos.context";
 
 export default function Todos() {
-  const [todos, setTodos] = useState(items);
+  const { todos, setTodos } = useTodosContext();
 
   const handleComplete = (id) => {
     setTodos(todos.map((t) => (t.id === id ? { ...t, completed: !t.completed } : t)));
@@ -14,23 +14,15 @@ export default function Todos() {
     setTodos(todos.filter((t) => t.id !== id));
   };
 
-  const updateTodo = (todoData) => {
+  const addTodo = (todoData) => {
     setTodos((prevTodos) => {
-      const exists = prevTodos.some((todo) => String(todo.id) === String(todoData.id));
-
-      console.log(prevTodos);
-
-      if (exists) {
-        return prevTodos.map((todo) => (String(todo.id) === String(todoData.id) ? todoData : todo));
-      } else {
-        return [...prevTodos, todoData];
-      }
+      return [...prevTodos, todoData];
     });
   };
 
   return (
     <main className="flex flex-col items-center justify-center w-full gap-20">
-      <AddToDo updateTodo={updateTodo} />
+      <AddToDo addToDo={addTodo} />
       <ul className="flex flex-col items-start justify-around p-0 mx-24 my-4 bg-gray-100 shadow-sm max-h-[70vh] overflow-y-auto">
         {todos.map((todo) => (
           <li className="flex items-center gap-1.5 p-1.5" key={todo.id}>
@@ -41,7 +33,7 @@ export default function Todos() {
             >
               {todo.completed ? "Completed" : "Complete"}
             </button>
-            <Link to={`/item/${todo.id}`} className="text-blue-600">
+            <Link to={`/todos/${todo.id}`} className="text-blue-600">
               {todo.task}
             </Link>
             <button className="px-2 py-1 border-2 border-red-500 rounded text-red-500 transition-all duration-400 cursor-pointer text-base hover:bg-red-500 hover:text-white" onClick={() => handleDelete(todo.id)}>

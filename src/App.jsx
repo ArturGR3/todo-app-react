@@ -5,6 +5,7 @@ import Sidebar from "./components/Sidebar";
 import Todos from "./pages/Todos";
 import AboutPage from "./pages/AboutPage";
 import NotFoundPage from "./pages/NotFoundPage";
+import ItemDetails from "./pages/ItemDetails";
 
 function App() {
   return (
@@ -15,10 +16,9 @@ function App() {
         <Routes>
           <Route path="/about" element={<AboutPage />} />
           <Route path="/" element={<Todos />} />
-          {/* <Route path="/item/:itemId" element={<ItemDetails />} /> */}
+          <Route path="/todos/:todoID" element={<ItemDetails />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
-        {/* // <div className="flex flex-col items-center justify-start w-full gap-5">// </div> */}
       </div>
       <Footer />
     </div>
